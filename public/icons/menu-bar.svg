@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="400px" viewBox="0 0 960 520" width="32px" fill="#4a372f">
+  <!-- First set of two horizontal lines with a 30px gap -->
+  <path d="M160 0h640v40H160z"/>
+  <path d="M160 70h640v40H160z"/>
+
+  <!-- Second set of two horizontal lines with an 80px gap after the first pair -->
+  <path d="M160 190h640v40H160z"/>
+  <path d="M160 260h640v40H160z"/>
+
+  <!-- Third set of two horizontal lines with an 80px gap after the second pair -->
+  <path d="M160 380h640v40H160z"/>
+  <path d="M160 450h640v40H160z"/>
+</svg>
