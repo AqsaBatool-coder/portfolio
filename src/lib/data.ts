@@ -172,6 +172,14 @@ export const skills: SkillCategory[] = [
 
 export const projects: Project[] = [
   {
+    title: "Zephyrix",
+    description:
+      "Performance marketing and AI-automation agency website — designed and developed end-to-end as a standalone freelance build, with a fast Next.js front, modern layout, and conversion-focused UX.",
+    tech: ["Next.js", "Node.js", "TypeScript", "Tailwind CSS"],
+    href: "https://zephyrix.io/",
+    repo: "https://github.com/AqsaBatool-coder/zephyrix-web",
+  },
+  {
     title: "TyreEurope",
     description:
       "Responsive e-commerce experience for a European tyre marketplace — built with a focus on speed, clean UI, and smooth product browsing.",
