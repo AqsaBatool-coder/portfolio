@@ -1,17 +1,36 @@
-import React from 'react'
-import HeroSection from './hero-section/page'
+import React from "react";
+import HeroSection from "./hero-section/page";
+import AboutSection from "./about-section/page";
+import SkillsSection from "./skills-section/page";
+import ProjectsSection from "./projects-section/page";
+import ExperienceSection from "./experience-section/page";
+import EducationSection from "./education-section/page";
+import ContactSection from "./contact-section/page";
+
+const Divider = () => (
+  <div className="relative section-padding mx-auto max-w-7xl">
+    <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
+  </div>
+);
 
 const HomePage = () => {
+  return (
+    <React.Fragment>
+      <HeroSection />
+      <Divider />
+      <AboutSection />
+      <Divider />
+      <SkillsSection />
+      <Divider />
+      <ProjectsSection />
+      <Divider />
+      <ExperienceSection />
+      <Divider />
+      <EducationSection />
+      <Divider />
+      <ContactSection />
+    </React.Fragment>
+  );
+};
 
-
-    return (
-        <React.Fragment>
-            <HeroSection />
-            <div className='flex justify-end w-full mt-[100px] md:mt-[160px] xl:mt-[220px]'>
-                <div className='flex justify-end bg-line-break h-[1px] w-[70%] rounded-[2px]' />
-            </div>
-        </React.Fragment>
-    )
-}
-
-export default HomePage
+export default HomePage;

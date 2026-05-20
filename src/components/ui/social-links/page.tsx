@@ -1,44 +1,66 @@
-'use client'
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+"use client";
+
+import Link from "next/link";
+import { Github, Linkedin } from "lucide-react";
+import { profile } from "@/lib/data";
 
 interface SocialLinksProps {
-    urlTitel?: string;
-    url?: string;
-    isDownload?: boolean;
-    showButton?: boolean;
+  urlTitel?: string;
+  url?: string;
+  isDownload?: boolean;
+  showButton?: boolean;
 }
 
+const SocialLinks = ({
+  urlTitel,
+  url = "",
+  isDownload = false,
+  showButton = true,
+}: SocialLinksProps) => {
+  return (
+    <div className="flex items-center gap-3">
+      {showButton && urlTitel && (
+        <div className="inline-flex">
+          {isDownload ? (
+            <a
+              href={url}
+              target="_blank"
+              download
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-background bg-neon-gradient shadow-neon glow-hover uppercase tracking-wide"
+            >
+              {urlTitel}
+            </a>
+          ) : (
+            <Link
+              href={url}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-semibold text-background bg-neon-gradient shadow-neon glow-hover uppercase tracking-wide"
+            >
+              {urlTitel}
+            </Link>
+          )}
+        </div>
+      )}
 
-const SocialLinks = ({ urlTitel, url = '', isDownload = false, showButton = true }: SocialLinksProps) => {
+      <div className="flex gap-2.5">
+        <Link
+          href={profile.linkedin}
+          target="_blank"
+          aria-label="LinkedIn"
+          className="w-11 h-11 grid place-items-center rounded-full glass border border-border text-muted hover:text-text glow-hover"
+        >
+          <Linkedin size={16} />
+        </Link>
+        <Link
+          href={profile.github}
+          target="_blank"
+          aria-label="GitHub"
+          className="w-11 h-11 grid place-items-center rounded-full glass border border-border text-muted hover:text-text glow-hover"
+        >
+          <Github size={16} />
+        </Link>
+      </div>
+    </div>
+  );
+};
 
-
-    return (
-        <div className='flex gap-x-[16px]'>
-            {showButton
-                && <div className='flex justify-center items-center bg-peach/75 rounded-[25px] w-full max-w-[215px] h-[48px] md:h-[54px] cursor-pointer'>
-                    {isDownload
-                        ? <a href={url} target='blank' download className='!font-epilogue text-primary text-[14px] leading-[14px] md:text-[18px] md:leading-[18px] font-[700] md:font-[500] text-center uppercase'>
-                            {urlTitel}
-                        </a>
-                        : <Link href={url ? url : ''} className='!font-epilogue text-black text-[14px] leading-[14px] md:text-[18px] md:leading-[18px] font-[700] md:font-[500] text-center uppercase'>
-                            {urlTitel}
-                        </Link>
-                    }
-                </div>
-            }
-
-            <div className='flex gap-x-[12px] md:gap-x-[16px]'>
-                <Link href='https://www.linkedin.com/in/aqsa-batool1147/' className='flex' target='blank'>
-                    <Image src={'/icons/linkedin.svg'} priority className='' width={54} height={54} alt='link of linkedin account' />
-                </Link>
-                <Link href='https://github.com/aqsa-bs' className='flex' target='blank'>
-                    <Image src={'/icons/github.svg'} priority className='' width={54} height={54} alt='link of github account' />
-                </Link>
-            </div>
-        </div >
-    )
-}
-
-export default SocialLinks
+export default SocialLinks;

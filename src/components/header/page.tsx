@@ -1,133 +1,165 @@
 "use client";
-import { useState, useEffect, } from "react"
-import Image from "next/image"
-import { X } from "lucide-react"
-import Link from "next/link"
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { navLinks, profile } from "@/lib/data";
+
+const SECTION_IDS = navLinks.map((n) => n.href.replace("#", ""));
 
 const Header = () => {
-    const [isMobile, setIsMobile] = useState(false)
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const [prevScrollpos, setPrevScrollpos] = useState(0)
-    const [scrollTimeout, setScrollTimeout] = useState<number | null>(null)
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen)
-    }
-    const handleLinkClick = () => {
-        setIsMenuOpen(false)
-    }
-    const handleScroll = () => {
-        const currentScrollPos = window.scrollY
-        const navbar = document.getElementById("navbar")
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string>("home");
 
-        if (navbar) {
-            if (currentScrollPos > prevScrollpos && currentScrollPos > 50) {
-                navbar.style.top = window.screen?.width < 768 ? "-76px" : "-96px"
-            } else {
-                navbar.style.top = window.screen?.width < 768 ? "-76px" : "-96px"
-            }
-        }
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-        setPrevScrollpos(currentScrollPos)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
 
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout)
-        }
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
-        setScrollTimeout(
-            setTimeout(() => {
-                const navbar = document.getElementById("navbar")
-                if (navbar) {
-                    navbar.style.transition = "all 0.3s ease-in-out"
-                    navbar.style.top = "0"
-                }
-            }, 100) as unknown as number
-        )
-    }
+    return () => observer.disconnect();
+  }, []);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
-        handleResize()
-        window.addEventListener("resize", handleResize)
-        window.addEventListener("scroll", handleScroll)
+  const handleLinkClick = () => setOpen(false);
 
-        return () => {
-            window.removeEventListener("resize", handleResize)
-            window.removeEventListener("scroll", handleScroll)
-
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout)
-            }
-        }
-    }, [prevScrollpos, scrollTimeout])
-
-
-    return (
-        <header id="navbar" className={`flex bg-peach/75 justify-between items-center w-full h-[76px] md:h-[96px] px-[16px] md:px-[52px] xl:px-[100px] border-b-[0.5px] border-primary fixed z-[10]`}>
-            <div className="flex items-center" data-aos="fade-down">
-                <Link href="/">
-                    <h1 className="!font-impact mr-2 text-brown  text-[1.25rem] leading-[1.25rem] md:text-[2rem] md:leading-[3rem] font-[700] text-nowrap tracking-[1.5px] uppercase">Aqsa Batool</h1>
-                </Link>
+  return (
+    <header
+      id="navbar"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "py-3 bg-background/70 backdrop-blur-xl border-b border-border/60"
+          : "py-5 bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="section-padding mx-auto max-w-7xl flex items-center justify-between">
+        <Link
+          href="#home"
+          className="group flex items-center gap-3"
+          aria-label="Aqsa Batool — home"
+        >
+          <div className="relative">
+            <div className="w-9 h-9 rounded-xl bg-neon-gradient grid place-items-center font-bold text-background shadow-neon group-hover:shadow-neon-lg transition-shadow">
+              AB
             </div>
-            {isMobile
-                ? <>
-                    <Image
-                        src="/icons/menu-bar.svg" alt="Menu Logo" width={50} height={32}
-                        className="cursor-pointer transform transition-transform duration-500 ease-out"
-                        onClick={toggleMenu} priority
-                    />
-                    <div className={`fixed top-0 left-0 w-full h-full z-[999] flex flex-col justify-center items-center transform transition-transform duration-500 bg-black ease-out ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                        <X onClick={toggleMenu} size={40} className="absolute top-6 right-3 !font-[100] text-peach cursor-pointer" />
-                        <Link
-                            onClick={handleLinkClick}
-                            href="/portfolio"
-                            className={`!font-epilogue no-underline font-[500] text-[2.25rem] mt-20 text-peach`}
-                        >
-                            Portfolio
-                        </Link>
-                        <Link
-                            onClick={handleLinkClick}
-                            href="/about"
-                            className={`!font-epilogue no-underline font-[500] text-[2.25rem] mt-20 text-peach`}
-                        >
-                            About
-                        </Link>
-                        <Link
-                            onClick={handleLinkClick}
-                            href="/contact"
-                            className={`!font-epilogue no-underline font-[500] text-[2.25rem] mt-20 text-peach`}
-                        >
-                            Contact
-                        </Link>
-                    </div>
-                </>
-                : <div className="hidden sm:block" data-aos="fade-down">
-                    <nav className="flex items-center md:gap-[1rem] xl:gap-[1.5rem] !font-epilogue text-[1.16rem] leading-[1.5rem] tracking-[-0.48px] !font-[600]">
-                        <Link
-                            href="/portfolio"
-                            className={`no-underline p-[10px] text-brown`}
-                        >
-                            Portfolio
-                        </Link>
-                        <Link
-                            href="/about"
-                            className={`no-underline p-[10px] text-brown`}
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className={`no-underline p-[10px] text-brown`}
-                        >
-                            Contact
-                        </Link>
-                    </nav>
-                </div>
-            }
-        </header>
-    )
-}
+            <span className="absolute -inset-0.5 rounded-xl bg-neon-gradient opacity-0 group-hover:opacity-40 blur-md transition-opacity" />
+          </div>
+          <div className="hidden sm:block">
+            <p className="text-sm font-semibold tracking-wide text-text leading-none">
+              {profile.name}
+            </p>
+            <p className="text-[11px] font-mono text-muted leading-none mt-1">
+              {profile.role}
+            </p>
+          </div>
+        </Link>
 
-export default Header
+        <nav className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => {
+            const id = link.href.replace("#", "");
+            const isActive = active === id;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+                  isActive ? "text-text" : "text-muted hover:text-text"
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute left-1/2 -translate-x-1/2 bottom-0 h-[2px] rounded-full bg-neon-gradient transition-all duration-300 ${
+                    isActive ? "w-6 opacity-100 shadow-[0_0_10px_rgba(255,110,199,0.8)]" : "w-0 opacity-0"
+                  }`}
+                />
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="#contact"
+            className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-text border border-border glass glow-hover"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(255,110,199,0.9)] animate-pulse" />
+            Let&apos;s talk
+          </Link>
+        </div>
+
+        <button
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="lg:hidden p-2 rounded-lg glass text-text"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      <div
+        className={`lg:hidden fixed inset-x-0 top-[64px] transition-all duration-500 ${
+          open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+      >
+        <div className="mx-4 mt-4 rounded-2xl glass-strong p-4 shadow-neon">
+          <nav className="flex flex-col">
+            {navLinks.map((link) => {
+              const id = link.href.replace("#", "");
+              const isActive = active === id;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={handleLinkClick}
+                  className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                    isActive
+                      ? "text-text bg-primary/10 border border-primary/30"
+                      : "text-muted hover:text-text hover:bg-white/[0.03]"
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  <span className="font-mono text-xs text-primary/70">
+                    {String(navLinks.indexOf(link) + 1).padStart(2, "0")}
+                  </span>
+                </Link>
+              );
+            })}
+            <Link
+              href="#contact"
+              onClick={handleLinkClick}
+              className="mt-3 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-background bg-neon-gradient shadow-neon"
+            >
+              Let&apos;s talk
+            </Link>
+          </nav>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
