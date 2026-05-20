@@ -113,7 +113,7 @@ const EducationSection = () => {
               <div className="rounded-xl border border-border bg-surface/60 p-4 text-center">
                 <p className="text-2xl font-bold text-gradient">BS</p>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-muted mt-1">
-                  Comp. Sciences
+                  Comp. Science
                 </p>
               </div>
             </div>
