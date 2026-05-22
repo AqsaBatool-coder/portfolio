@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import { profile, navLinks } from "@/lib/data";
 
 const Footer = () => {
@@ -67,8 +68,8 @@ const Footer = () => {
 
             <div className="mt-5 flex items-center gap-3">
               {[
-                { href: profile.github, Icon: Github, label: "GitHub" },
-                { href: profile.linkedin, Icon: Linkedin, label: "LinkedIn" },
+                { href: profile.github, Icon: GithubIcon, label: "GitHub" },
+                { href: profile.linkedin, Icon: LinkedinIcon, label: "LinkedIn" },
                 { href: `mailto:${profile.email}`, Icon: Mail, label: "Email" },
               ].map(({ href, Icon, label }) => (
                 <Link

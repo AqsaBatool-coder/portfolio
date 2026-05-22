@@ -4,10 +4,9 @@ import Link from "next/link";
 import {
   Download,
   ArrowRight,
-  Github,
-  Linkedin,
   Mail,
 } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import { profile } from "@/lib/data";
 import FloatingIcons from "@/components/ui/floating-icons/page";
 
@@ -23,7 +22,7 @@ const HeroSection = () => {
       <div className="absolute -top-40 -left-20 w-[28rem] h-[28rem] rounded-full bg-primary/15 blur-[140px] pointer-events-none" />
       <div className="absolute -bottom-40 right-0 w-[34rem] h-[34rem] rounded-full bg-accent/15 blur-[160px] pointer-events-none" />
 
-      <div className="section-padding mx-auto max-w-7xl w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-20 items-center">
+      <div className="section-padding mx-auto max-w-7xl w-full grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-20 pb-8 lg:pb-0 items-center">
         {/* Left: copy */}
         <div className="relative animate-fade-in-up">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[11px] tracking-[0.25em] uppercase text-primary font-mono">
@@ -81,8 +80,8 @@ const HeroSection = () => {
             <span className="h-px flex-1 max-w-[60px] bg-border" />
             <div className="flex items-center gap-2">
               {[
-                { href: profile.github, Icon: Github, label: "GitHub" },
-                { href: profile.linkedin, Icon: Linkedin, label: "LinkedIn" },
+                { href: profile.github, Icon: GithubIcon, label: "GitHub" },
+                { href: profile.linkedin, Icon: LinkedinIcon, label: "LinkedIn" },
                 { href: `mailto:${profile.email}`, Icon: Mail, label: "Email" },
               ].map(({ href, Icon, label }) => (
                 <Link

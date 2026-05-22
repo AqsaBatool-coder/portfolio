@@ -21,10 +21,12 @@ export type SkillCategory = {
 
 export type Project = {
   title: string;
+  company: string;
   description: string;
   tech: string[];
   href?: string;
   repo?: string;
+  image?: string;
 };
 
 export type EducationEntry = {
@@ -45,7 +47,7 @@ export const profile = {
   github: "https://github.com/AqsaBatool-coder",
   resume: "/Aqsa_Batool_Resume.pdf",
   bio:
-    "Full Stack Developer skilled in React.js, Next.js, Node.js, and PostgreSQL, with experience delivering fast and reliable applications. I enjoy solving problems, learning quickly, and building secure, user-centered products with clean and accessible interfaces.",
+    "Full Stack Developer with 2+ years building production web applications for US and European clients in Next.js, React, Node.js, and PostgreSQL. Comfortable across the stack — from API design and authentication to frontend performance, accessibility, testing, and CI/CD. Experience shipping fintech, e-commerce, and B2B products remotely on cross-functional teams.",
   shortBio:
     "I craft fast, reliable, and accessible web products — from elegant UIs in Next.js to dependable APIs in Node.js and PostgreSQL.",
 };
@@ -66,14 +68,13 @@ export const experiences: Experience[] = [
     location: "United States",
     role: "Full Stack Developer",
     type: "Remote",
-    duration: "August 2025 — Present",
+    duration: "Aug 2025 — Present",
     achievements: [
-      "Developed and maintained full-stack features using Next.js, Node.js, React Query, and PostgreSQL, ensuring smooth performance and clean user experience across the product.",
-      "Collaborated closely with designers, product managers, QA, and fellow developers to bring features from concept to production.",
-      "Improved frontend structure by introducing Storybook components, ensuring consistency and reducing UI bugs.",
-      "Worked on accessibility and performance improvements, making interfaces inclusive and faster.",
-      "Wrote Cypress test cases for core flows, contributing to a more stable release cycle.",
-      "Engaged in pair programming, code reviews, and agile ceremonies, keeping the development process efficient and transparent.",
+      "Built features end-to-end for Simming.ai — an agentic AI platform for deploying humanlike AI teammates — using Next.js, Node.js, React Query, and PostgreSQL.",
+      "Owned the Networks module, designing and shipping group chat and thread-based posting features that enabled user collaboration across the platform.",
+      "Integrated AI agents across the product and implemented in-app video conferencing via Anam, partnering closely with the AI team on agent interaction.",
+      "Wrote Cypress end-to-end tests for core user flows and contributed to performance and accessibility improvements.",
+      "Worked daily with designers (Storybook UI reviews), PMs, QA, AI engineers, and fellow developers through pair programming and code review.",
     ],
   },
   {
@@ -170,50 +171,90 @@ export const skills: SkillCategory[] = [
   },
 ];
 
+// To add a real screenshot for a project, drop a PNG/JPG into
+// `public/images/` and set the `image` field below to its path,
+// e.g. "/images/simming.png"
 export const projects: Project[] = [
   {
-    title: "Zephyrix",
+    title: "Simming.ai",
+    company: "GrowthRune",
     description:
-      "Performance marketing and AI-automation agency website — designed and developed end-to-end as a standalone freelance build, with a fast Next.js front, modern layout, and conversion-focused UX.",
-    tech: ["Next.js", "Node.js", "TypeScript", "Tailwind CSS"],
-    href: "https://zephyrix.io/",
-    repo: "https://github.com/AqsaBatool-coder/zephyrix-web",
+      "Agentic AI platform for deploying humanlike AI teammates. Built end-to-end features in Next.js + Node.js, owned the Networks module (group chat & thread-based posting), and integrated in-app video conferencing via Anam.",
+    tech: ["Next.js", "Node.js", "React Query", "PostgreSQL", "Cypress", "Anam"],
+    href: "https://simming.ai",
+    image: "/images/simming.png",
   },
   {
     title: "TyreEurope",
+    company: "ByteShifted",
     description:
-      "Responsive e-commerce experience for a European tyre marketplace — built with a focus on speed, clean UI, and smooth product browsing.",
-    tech: ["Next.js", "React", "Tailwind CSS", "REST APIs"],
+      "Responsive e-commerce experience for a European tyre marketplace. Focused on fast product browsing, clean UI, and smooth checkout.",
+    tech: ["React.js", "Next.js", "Tailwind CSS", "RackBeat API"],
+    href: "https://tyreeurope.com/dk",
+    image: "/images/tyreeurope.png",
   },
   {
     title: "HostPepper",
+    company: "ByteShifted",
     description:
-      "Frontend interfaces for a modern hosting platform, integrating account dashboards, billing flows, and custom admin tooling.",
-    tech: ["React.js", "Next.js", "Node.js"],
+      "Frontend interfaces for a modern hosting platform — account dashboards, billing flows, and custom admin tooling.",
+    tech: ["React.js", "Next.js", "Node.js", "REST APIs"],
+    href: "https://hostpepper.com/en",
+    image: "/images/hostpepper.png",
   },
   {
     title: "DAEK Skandinavian",
+    company: "ByteShifted",
     description:
-      "Sleek storefront and inventory experience with RackBeat API integration for real-time stock and order management.",
-    tech: ["React", "Next.js", "RackBeat API", "Tailwind CSS"],
+      "Sleek storefront and inventory experience with RackBeat integration for real-time stock and order management.",
+    tech: ["React.js", "Next.js", "Tailwind CSS", "RackBeat API"],
+    href: "https://staging-daekskandinavien.vercel.app/",
+    image: "/images/daekskandinavien.png",
   },
   {
     title: "ByteShifted Website",
+    company: "ByteShifted",
     description:
       "Designed and developed ByteShifted's official website from scratch — mobile-first, modern layout, optimized for performance.",
-    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    tech: ["Next.js", "Tailwind CSS", "Vercel"],
+    href: "https://www.byteshifted.com",
+    image: "/images/byteshifted.png",
   },
+  // {
+  //   title: "CashOut Express",
+  //   company: "NextTier",
+  //   description:
+  //     "High-performance fintech UI focused on quick cash-out flows — pixel-perfect interface with smooth API integrations.",
+  //   tech: ["React.js", "REST APIs", "Tailwind CSS"],
+  //   href: "https://hostpepper.com/en",
+  //   image: "/images/cashout-express.png",
+  // },
   {
-    title: "CashOut Express & FluxFunds",
+    title: "FluxFunds",
+    company: "NextTier",
     description:
-      "High-performance UIs for fintech products — Phone2Funds, Gift4Cash and more — pixel-perfect interfaces with smooth API integration.",
-    tech: ["React.js", "REST APIs", "Tailwind CSS"],
+      "Frontend for a funds management product — clean dashboards, responsive design, and tight collaboration with backend on data flows.",
+    tech: ["React.js", "Tailwind CSS", "REST APIs"],
+    href: "https://fluxfunds-web.vercel.app/",
+    image: "/images/flex-funds.png",
   },
+  // {
+  //   title: "Phone2Funds",
+  //   company: "NextTier",
+  //   description:
+  //     "Mobile-first fintech interface enabling phone-based fund transfers with a fast, intuitive flow.",
+  //   tech: ["React.js", "Tailwind CSS", "REST APIs"],
+  //   image: "/images/phone-2-funds.png",
+  // },
   {
-    title: "Admin Panels Suite",
+    title: "Zephyrix",
+    company: "Personal Project",
     description:
-      "Built multiple admin panels featuring user management, system settings, and custom API integrations for production platforms.",
-    tech: ["Next.js", "Node.js", "PostgreSQL", "OAuth 2.0"],
+      "A personal project built end-to-end — exploring modern full-stack architecture, clean UI, and developer experience.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    href: "https://zephyrix-web.vercel.app/",
+    // repo: "https://github.com/AqsaBatool-coder/zephyrix",
+    image: "/images/zephyrix.png",
   },
 ];
 

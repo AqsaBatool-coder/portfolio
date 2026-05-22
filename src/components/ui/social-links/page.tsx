@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Github, Linkedin } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import { profile } from "@/lib/data";
 
 interface SocialLinksProps {
@@ -48,7 +48,7 @@ const SocialLinks = ({
           aria-label="LinkedIn"
           className="w-11 h-11 grid place-items-center rounded-full glass border border-border text-muted hover:text-text glow-hover"
         >
-          <Linkedin size={16} />
+          <LinkedinIcon size={16} />
         </Link>
         <Link
           href={profile.github}
@@ -56,7 +56,7 @@ const SocialLinks = ({
           aria-label="GitHub"
           className="w-11 h-11 grid place-items-center rounded-full glass border border-border text-muted hover:text-text glow-hover"
         >
-          <Github size={16} />
+          <GithubIcon size={16} />
         </Link>
       </div>
     </div>

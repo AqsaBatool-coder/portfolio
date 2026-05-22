@@ -5,12 +5,11 @@ import Link from "next/link";
 import {
   Mail,
   MapPin,
-  Github,
-  Linkedin,
   Send,
   CheckCircle2,
   ArrowUpRight,
 } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import SectionHeading from "@/components/ui/section-heading/page";
 import { profile } from "@/lib/data";
 
@@ -76,8 +75,8 @@ const ContactSection = () => {
               </p>
               <div className="mt-3 flex items-center gap-3">
                 {[
-                  { href: profile.github, Icon: Github, label: "GitHub" },
-                  { href: profile.linkedin, Icon: Linkedin, label: "LinkedIn" },
+                  { href: profile.github, Icon: GithubIcon, label: "GitHub" },
+                  { href: profile.linkedin, Icon: LinkedinIcon, label: "LinkedIn" },
                   { href: `mailto:${profile.email}`, Icon: Mail, label: "Email" },
                 ].map(({ href, Icon, label }) => (
                   <Link
