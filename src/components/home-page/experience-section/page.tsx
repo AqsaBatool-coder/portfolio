@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Briefcase, MapPin, ExternalLink } from "lucide-react";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { experiences, type Experience } from "@/lib/data";
 
 const ExperienceSection = () => {
@@ -9,11 +10,13 @@ const ExperienceSection = () => {
       id="experience"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="04 — Experience"
-        title="Where I&apos;ve **built things**"
-        description="From Pakistan to Denmark and the US — collaborating with remote teams and shipping real products."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="04 — Experience"
+          title="Where I&apos;ve **built things**"
+          description="From Pakistan to Denmark and the US — collaborating with remote teams and shipping real products."
+        />
+      </Reveal>
 
       <div className="mt-16 relative max-w-4xl mx-auto">
         {/* Vertical timeline line */}
@@ -27,7 +30,6 @@ const ExperienceSection = () => {
             <li
               key={exp.company + exp.duration}
               className="relative pl-12 md:pl-20"
-              style={{ animationDelay: `${idx * 80}ms` }}
             >
               {/* Dot with pulsing ring */}
               <span aria-hidden="true" className="absolute left-4 md:left-6 -translate-x-1/2 top-3">
@@ -35,7 +37,9 @@ const ExperienceSection = () => {
                 <span className="absolute inset-0 -m-2 rounded-full border border-primary/40 animate-pulse-glow" />
               </span>
 
-              <ExperienceCard exp={exp} />
+              <Reveal variant="right" delay={Math.min(idx * 90, 270)}>
+                <ExperienceCard exp={exp} />
+              </Reveal>
             </li>
           ))}
         </ol>

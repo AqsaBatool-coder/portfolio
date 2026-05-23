@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import { profile, navLinks } from "@/lib/data";
@@ -11,9 +12,13 @@ const Footer = () => {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-neon-gradient grid place-items-center font-bold text-background shadow-neon">
-                AB
-              </div>
+              <Image
+                src="/ab-logo-reversed.png"
+                alt="Aqsa Batool logo"
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-xl object-cover"
+              />
               <div>
                 <p className="text-base font-semibold text-text leading-none">
                   {profile.name}

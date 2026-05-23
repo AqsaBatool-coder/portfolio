@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { navLinks, profile } from "@/lib/data";
 
@@ -61,12 +62,14 @@ const Header = () => {
           className="group flex items-center gap-3"
           aria-label="Aqsa Batool — home"
         >
-          <div className="relative">
-            <div className="w-9 h-9 rounded-xl bg-neon-gradient grid place-items-center font-bold text-background shadow-neon group-hover:shadow-neon-lg transition-shadow">
-              AB
-            </div>
-            <span className="absolute -inset-0.5 rounded-xl bg-neon-gradient opacity-0 group-hover:opacity-40 blur-md transition-opacity" />
-          </div>
+          <Image
+            src="/ab-logo-reversed.png"
+            alt="Aqsa Batool logo"
+            width={40}
+            height={40}
+            priority
+            className="w-10 h-10 rounded-xl object-cover"
+          />
           <div className="hidden sm:block">
             <p className="text-sm font-semibold tracking-wide text-text leading-none">
               {profile.name}

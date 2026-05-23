@@ -193,13 +193,53 @@ textarea:focus-visible {
   border-radius: 6px;
 }
 
-/* Reveal on scroll utility */
-.reveal {
+/* Reveal-on-scroll utilities (paired with <Reveal /> component) */
+.reveal-up,
+.reveal-fade,
+.reveal-left,
+.reveal-right {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal.is-visible {
+.reveal-up        { transform: translate3d(0, 28px, 0); }
+.reveal-left      { transform: translate3d(-28px, 0, 0); }
+.reveal-right     { transform: translate3d(28px, 0, 0); }
+.reveal-fade      { transform: none; }
+
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-fade.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Drop GPU promotion once the entrance has played to avoid layer bloat */
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-fade.is-visible {
+  will-change: auto;
+}
+
+/* Respect user motion preferences — kill non-essential animation entirely */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-up,
+  .reveal-fade,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

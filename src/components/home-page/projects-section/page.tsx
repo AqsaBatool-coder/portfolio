@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight, ExternalLink, Folder } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons/page";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { projects, type Project } from "@/lib/data";
 
 const ProjectsSection = () => {
@@ -11,15 +12,22 @@ const ProjectsSection = () => {
       id="projects"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="03 — Projects"
-        title="A few things I&apos;ve **shipped**"
-        description="A selection of products I&apos;ve helped design, build, and scale across fintech, e-commerce, AI, and B2B."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="03 — Projects"
+          title="A few things I&apos;ve **shipped**"
+          description="A selection of products I&apos;ve helped design, build, and scale across fintech, e-commerce, AI, and B2B."
+        />
+      </Reveal>
 
       <div className="mt-14 grid gap-6 md:gap-8">
         {projects.map((project, index) => (
-          <ProjectCard key={project.title} project={project} index={index} />
+          <Reveal
+            key={project.title}
+            variant={index % 2 === 0 ? "left" : "right"}
+          >
+            <ProjectCard project={project} index={index} />
+          </Reveal>
         ))}
       </div>
     </section>

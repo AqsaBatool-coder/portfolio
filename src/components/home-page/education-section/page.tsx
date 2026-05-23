@@ -1,5 +1,6 @@
 import { GraduationCap, BookOpen, Layers, MapPin } from "lucide-react";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { education } from "@/lib/data";
 
 const focusAreas = [
@@ -17,17 +18,21 @@ const EducationSection = () => {
       id="education"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="05 — Education"
-        title="Academic **foundations**"
-        description="My path through computer science — from BS to MS."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="05 — Education"
+          title="Academic **foundations**"
+          description="My path through computer science — from BS to MS."
+        />
+      </Reveal>
 
       <div className="mt-14 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
         <div className="grid gap-5">
           {education.map((edu, idx) => (
-            <article
+            <Reveal
               key={edu.school}
+              variant="left"
+              delay={idx * 90}
               className="group relative glass rounded-2xl border border-border p-6 md:p-7 glow-hover overflow-hidden"
             >
               <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-accent/15 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -71,12 +76,12 @@ const EducationSection = () => {
                   #{String(idx + 1).padStart(2, "0")}
                 </span>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
 
         {/* Focus areas card */}
-        <aside className="relative glass rounded-2xl border border-border p-6 md:p-7 glow-hover overflow-hidden">
+        <Reveal variant="right" delay={120} className="relative glass rounded-2xl border border-border p-6 md:p-7 glow-hover overflow-hidden">
           <div className="absolute -inset-px rounded-2xl pointer-events-none bg-neon-gradient opacity-[0.08]" />
           <div className="relative">
             <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-primary">
@@ -118,7 +123,7 @@ const EducationSection = () => {
               </div>
             </div>
           </div>
-        </aside>
+        </Reveal>
       </div>
     </section>
   );

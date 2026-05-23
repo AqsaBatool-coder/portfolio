@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { skills } from "@/lib/data";
 
 const ICONS: Record<string, LucideIcon> = {
@@ -25,18 +26,21 @@ const SkillsSection = () => {
       id="skills"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="02 — Skills"
-        title="The **tools** I reach for"
-        description="A curated, opinionated stack — the libraries, platforms, and practices I use to ship reliable products."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="02 — Skills"
+          title="The **tools** I reach for"
+          description="A curated, opinionated stack — the libraries, platforms, and practices I use to ship reliable products."
+        />
+      </Reveal>
 
       <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {skills.map((category) => {
+        {skills.map((category, idx) => {
           const Icon = ICONS[category.icon] ?? Sparkles;
           return (
-            <div
+            <Reveal
               key={category.title}
+              delay={Math.min(idx * 70, 350)}
               className="group relative glass rounded-2xl p-6 border border-border glow-hover overflow-hidden"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-primary/10 via-transparent to-accent/10 pointer-events-none" />
@@ -62,7 +66,7 @@ const SkillsSection = () => {
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
           );
         })}
       </div>

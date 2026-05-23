@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons/page";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { profile } from "@/lib/data";
 
 const ContactSection = () => {
@@ -31,15 +32,17 @@ const ContactSection = () => {
       id="contact"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="06 — Contact"
-        title="Let&apos;s **build something** together"
-        description="Have a role, project, or collaboration in mind? Drop a line — I read every message."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="06 — Contact"
+          title="Let&apos;s **build something** together"
+          description="Have a role, project, or collaboration in mind? Drop a line — I read every message."
+        />
+      </Reveal>
 
       <div className="mt-14 grid lg:grid-cols-[1fr_1.2fr] gap-6 lg:gap-10 items-start">
         {/* Info card */}
-        <aside className="relative glass rounded-3xl border border-border p-7 md:p-9 overflow-hidden">
+        <Reveal variant="left" delay={80} className="relative glass rounded-3xl border border-border p-7 md:p-9 overflow-hidden">
           <div className="absolute -inset-px rounded-3xl pointer-events-none bg-neon-gradient opacity-[0.08]" />
           <div className="relative">
             <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-primary">
@@ -92,9 +95,10 @@ const ContactSection = () => {
               </div>
             </div>
           </div>
-        </aside>
+        </Reveal>
 
         {/* Form */}
+        <Reveal variant="right" delay={140}>
         <form
           onSubmit={handleSubmit}
           className="relative glass rounded-3xl border border-border p-7 md:p-9 glow-hover"
@@ -165,6 +169,7 @@ const ContactSection = () => {
             </button>
           </div>
         </form>
+        </Reveal>
       </div>
     </section>
   );

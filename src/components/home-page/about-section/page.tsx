@@ -7,6 +7,7 @@ import {
   HeartHandshake,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/section-heading/page";
+import Reveal from "@/components/ui/reveal/page";
 import { profile } from "@/lib/data";
 
 const highlights = [
@@ -38,15 +39,17 @@ const AboutSection = () => {
       id="about"
       className="relative py-24 md:py-32 section-padding mx-auto max-w-7xl"
     >
-      <SectionHeading
-        eyebrow="01 — About"
-        title="A developer who **codes, designs and ships**."
-        description="A short story of who I am, what I do, and how I like to build."
-      />
+      <Reveal>
+        <SectionHeading
+          eyebrow="01 — About"
+          title="A developer who **codes, designs and ships**."
+          description="A short story of who I am, what I do, and how I like to build."
+        />
+      </Reveal>
 
       <div className="mt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
         {/* Bio card */}
-        <div className="relative glass rounded-3xl p-7 md:p-9 border border-border glow-hover">
+        <Reveal variant="left" delay={80} className="relative glass rounded-3xl p-7 md:p-9 border border-border glow-hover">
           <div className="absolute -inset-px rounded-3xl pointer-events-none bg-neon-gradient opacity-[0.08]" />
           <div className="relative">
             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-primary">
@@ -86,13 +89,15 @@ const AboutSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         {/* Highlights grid */}
         <div className="grid sm:grid-cols-2 gap-4">
-          {highlights.map(({ Icon, title, desc }) => (
-            <div
+          {highlights.map(({ Icon, title, desc }, i) => (
+            <Reveal
               key={title}
+              variant="right"
+              delay={120 + i * 80}
               className="group relative glass rounded-2xl p-6 border border-border glow-hover overflow-hidden"
             >
               <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-primary/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -107,7 +112,7 @@ const AboutSection = () => {
                   {desc}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
